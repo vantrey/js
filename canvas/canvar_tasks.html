@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <title>Canvas Tasks</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    // функция рсуем снеговика
+
+    function circle(x, y, rad, fillCircle) {
+        ctx.beginPath();
+        ctx.arc(x, y, rad, 0, Math.PI * 2, false);
+        if (fillCircle) {
+            ctx.fill();
+        } else {
+            ctx.stroke();
+        }
+    }
+
+    function drawSnowMan(x, y) {
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "black";
+        circle(x, y, 30, false);
+        ctx.fillStyle = "black";
+        circle(x - 10, y - 10, 5, true);
+        circle(x + 10, y - 10, 5, true);
+        circle(x, y + 80, 50, false);
+        circle(x, y + 80, 5, true);
+        circle(x, y + 100, 5, true);
+        circle(x, y + 60, 5, true);
+        ctx.fillStyle = "orange";
+        circle(x, y + 5, 5, true);
+    }
+
+    // соединяем точки
+    function drawPoints(pointsCoordinate) {
+        ctx.lineWidth = 4;
+
+        ctx.beginPath();
+
+        ctx.moveTo(pointsCoordinate[0][0], pointsCoordinate[0][1]);
+
+        for (var i = 1; i < pointsCoordinate.length; i++) {
+            ctx.lineTo(pointsCoordinate[i][0], pointsCoordinate[i][1]);
+        }
+
+        ctx.stroke();
+    }
+
+    var points = [
+        [50, 50],
+        [50, 100],
+        [100, 100],
+        [100, 50],
+        [50, 50]
+    ];
+    drawPoints(points);
+
+    var mysteryPoints = [
+        [50, 50],
+        [50, 100],
+        [25, 120],
+        [100, 50],
+        [70, 90],
+        [100, 90],
+        [70, 120]
+    ];
+    drawPoints(mysteryPoints);
+
+    $("canvas").mousemove(function(event) {
+        ctx.fillStyle = "red";
+        circle(event.offsetX, event.offsetY, 3, true);
+    });
+    </script>
+</body>
+
+</html>

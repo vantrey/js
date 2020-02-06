@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends</title>
+</head>
+<body>
+	<h1>Hallo World</h1>
+	<script src="http://code.jquery.com/jquery-2.1.0.js"></script>
+	<script>
+		$("h1").text("Friends");
+		var friendsName=["Nic", "Jon","Mark","Paul", "Piter"];
+		for (var i = 0; i < friendsName.length; i++) {
+			$("body").append("<p>"+friendsName[i]+"</p>");
+		}
+
+		$("p").append(" The Best");
+		$("p").hide().fadeIn(3000);
+
+		var k=200;
+		for (var j = 0; j < 5; j++) {
+			$("h1").fadeOut(k).fadeIn(k);
+			k+=200;
+		}
+		$("h1").fadeOut(1000).delay(5000).fadeIn(1000);
+		$("h1").fadeTo(2000, 0.2);
+	</script>
+
+</body>
+</html>

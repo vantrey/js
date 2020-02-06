@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id='canvas' width="1000" height="600"></canvas>
+
+<script>
+
+	var canvas=document.getElementById('canvas');
+	var ctx=canvas.getContext('2d');
+
+	// ctx.fillRect(0, 0, 10, 10);
+	// for (var i = 0; i < 8; i++) {
+	// 	ctx.fillRect(i*10, i*10, 10, 10);
+	// }
+	/*ctx.fillRect(100, 100, 50, 50);
+	ctx.fillRect(120, 150, 10, 20);
+	ctx.fillRect(65, 170, 120, 10);
+	ctx.fillRect(90, 180, 70, 70);
+	ctx.fillRect(90, 240, 10, 70);
+	ctx.fillRect(150, 240, 10, 70);*/
+
+
+	/*ctx.fillStyle='#350cec91';
+	ctx.fillRect(0, 0, 50, 100);
+	ctx.fillStyle='#73e069b6';
+	ctx.fillRect(50, 0, 50, 100);
+	ctx.fillStyle='#d60b0b';
+	ctx.fillRect(100, 0, 50, 100);
+
+	ctx.strokeStyle='#7BA5B788';
+	ctx.lineWidth=4;
+	ctx.strokeRect(5, 105, 100, 20);
+ */
+
+	// ctx.strokeStyle='#12EBCF';
+	// ctx.lineWidth=4;
+	// ctx.beginPath();
+	// ctx.moveTo(10, 10);
+	// ctx.lineTo(60, 60);
+	// ctx.moveTo(60, 10);
+	// ctx.lineTo(10, 60);
+	// ctx.stroke();
+	
+
+	// человечук
+	ctx.lineWidth=4;
+	ctx.strokeStyle='#68CD25';
+	var zeroPoint=100;
+	ctx.strokeRect(zeroPoint, zeroPoint, 20, 20);
+	ctx.beginPath();
+	ctx.moveTo(zeroPoint+10, zeroPoint+20);
+	ctx.lineTo(zeroPoint+10, zeroPoint+60);
+	ctx.lineTo(zeroPoint+10-20, zeroPoint+60+30);
+	ctx.moveTo(zeroPoint+10, zeroPoint+60);
+	ctx.lineTo(zeroPoint+10+20, zeroPoint+60+30);
+	ctx.moveTo(zeroPoint+10, zeroPoint+60-20);
+	ctx.lineTo(zeroPoint+10-20, zeroPoint+60-20-10);
+	ctx.moveTo(zeroPoint+10, zeroPoint+60-20);
+	ctx.lineTo(zeroPoint+10+20, zeroPoint+60-20-10);
+
+	ctx.stroke();
+
+    //домик
+	ctx.fillStyle='#2652D1';
+	ctx.beginPath();
+	ctx.moveTo(200, 100);
+	ctx.lineTo(200, 60);
+	ctx.lineTo(230, 30);
+	ctx.lineTo(260, 60);
+	ctx.lineTo(260, 100);
+	ctx.lineTo(200, 100);
+	ctx.fill();
+	
+	// окружности
+
+	ctx.lineWidth=2;
+	ctx.strokeStyle="#40C12F";
+	ctx.beginPath();
+	ctx.arc(50, 250, 20, 0, Math.PI/2, false);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(100, 250, 20, 0, 0.523599, false);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(150, 250, 20, 0, Math.PI*(3/2), false);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(200, 250, 20, 0, Math.PI*2, false);
+	ctx.stroke();
+
+ // circle function
+
+	function circle(x, y, rad, fillCircle) {
+		ctx.beginPath();
+		ctx.arc(x, y, rad, 0, Math.PI*2, false);
+		if (fillCircle) {
+			ctx.fill();
+		} else {
+			ctx.stroke();
+		}
+	};
+
+
+	ctx.lineWidth=4;
+	ctx.strokeStyle='red';
+	circle(300, 300, 50);
+	ctx.strokeStyle='green';
+	circle(300, 300, 40);
+	ctx.strokeStyle='blue';
+	circle(300, 300, 30);
+	ctx.strokeStyle='yellow';
+	circle(300, 300, 20);
+	ctx.strokeStyle='orange';
+	circle(300, 300, 10);
+	circle(320, 320, 10, true);
+
+	// SnowMan!
+	ctx.lineWidth=3;
+	ctx.strokeStyle='black';
+	circle(600, 200, 30, false);
+	ctx.fillStyle='black';
+	circle(590, 190, 5, true);
+	circle(610, 190, 5, true);
+	circle(600, 280, 50, false);
+	circle(600, 280, 5, true);
+	circle(600, 300, 5, true);
+	circle(600, 260, 5, true);
+	ctx.fillStyle='orange';
+	circle(600, 205, 5, true);	
+
+
+</script>
+</body>
+</html>	

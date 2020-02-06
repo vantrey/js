@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<HEAD>
+    <meta charset="utf-8">
+    <title>Words</title>
+</HEAD>
+
+<body>
+    <h1>Слова 2.0</h1>
+    <canvas id='canvas' width="400" height="400"></canvas>
+    <script>
+    /*
+        var name=prompt("Как вас зовут?");
+        console.log("Привет, "+name);
+        var likesCats=confirm("Тебе нравятся кошки?");
+        if (likesCats) {
+            console.log("Ты классная кошка!");
+        } else {
+            console.log("Ну ничего, ты все равно молодец!");
+        }
+        alert("JavaScript is cool!");
+        
+
+        var words=["программа","макака","прекрасный", "оладушек", "крокодил", "бегемот"];
+        var word=words[Math.floor(Math.random()* words.length)];
+        var answerArray=[];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i]="_";
+        }
+        var remainingLetters=word.length;
+        var guesses=20;
+        alert("Кол-во букв "+remainingLetters+" Кол-во попыток "+guesses);
+
+
+        while (remainingLetters>0 && guesses>0) {
+
+            
+            alert("Слово "+answerArray.join(" "));
+            var guess=prompt("Угадай букву или нажми ОТМЕНА для выхода из игры.");
+            
+            if (guess===null) {
+                break;
+            } else {
+                if (guess.length!==1) {
+                    alert("Пожалуйста, введите только одну букву.");
+                } else {
+                    guess=guess.toLowerCase();
+                    guesses--;
+                    alert("Осталось попыток "+guesses);
+                    for (var j = 0; j < word.length; j++) {
+                        if (word[j]===guess && answerArray[j]!==guess) {
+                            answerArray[j]=guess;
+                            remainingLetters--;
+                                                        
+                        }
+                    }
+                }
+            }
+
+        }
+        alert("Слово "+answerArray.join(" "));
+        alert("Было загадано слово "+word);
+        */
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var faults = 0;
+    var zeroPoint = 150;
+       
+    var pickWord = function() {
+        var words = ["программа"/*, "макака", "прекрасный", "оладушек", "крокодил", "бегемот"*/];
+        return words[Math.floor(Math.random() * words.length)];
+    };
+    var setupAnswerArray = function(word) {
+        var wr = [];
+        for (var i = 0; i < word.length; i++) {
+            wr[i] = " ";
+        }
+        return wr;
+
+    };
+    function showPlayerProgress(answerArray) {
+        ctx.font = '50px Courier';
+        ctx.fontStyle = 'Black';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'bottom';
+        for (var i = 0; i < answerArray.length; i++) {
+            ctx.fillText(answerArray[i], 10 + i*40, canvas.height-5);          
+        }
+        for (var i = 0; i < answerArray.length; i++) {
+            ctx.fillRect(10 + i*40, canvas.height-5, 30, 2);
+        }
+    };
+    var getGuess = function() {
+        return prompt("Угадай букву или нажми ОТМЕНА для выхода из игры.");
+    };
+    var updateGameState = function(guess, word, answerArray) {
+        var count = 0;
+        for (var j = 0; j < word.length; j++) {
+            if (guess === word[j] && guess !== answerArray[j]) {
+                answerArray[j] = guess;
+                count++;
+            } else if (guess === answerArray[j]) {
+                count = null;
+            }
+        }
+        return count;
+    };
+    var showAnswerAndCongratulatePlayer = function(answerArray) {
+        alert("Было загадано слово " + word);
+    };
+    function drawMan(faults) {
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = 'black';
+        if (faults == 1) {
+            ctx.strokeRect(zeroPoint, zeroPoint, 20, 20);
+        } else if (faults == 2) {
+            ctx.beginPath();
+            ctx.moveTo(zeroPoint + 10, zeroPoint + 20);
+            ctx.lineTo(zeroPoint + 10, zeroPoint + 60);
+            ctx.stroke();
+        } else if (faults == 3) {
+            ctx.beginPath();
+            ctx.moveTo(zeroPoint + 10, zeroPoint + 60);
+            ctx.lineTo(zeroPoint + 10 - 20, zeroPoint + 60 + 30);
+            ctx.stroke();
+        } else if (faults == 4) {
+            ctx.beginPath();
+            ctx.moveTo(zeroPoint + 10, zeroPoint + 60);
+            ctx.lineTo(zeroPoint + 10 + 20, zeroPoint + 60 + 30);
+            ctx.stroke();
+        } else if (faults == 5) {
+            ctx.beginPath();
+            ctx.moveTo(zeroPoint + 10, zeroPoint + 60 - 20);
+            ctx.lineTo(zeroPoint + 10 - 20, zeroPoint + 60 - 20 - 10);
+            ctx.stroke();
+        } else {
+            ctx.beginPath();
+            ctx.moveTo(zeroPoint + 10, zeroPoint + 60 - 20);
+            ctx.lineTo(zeroPoint + 10 + 20, zeroPoint + 60 - 20 - 10);
+            ctx.stroke();
+        }
+    };
+    var drawFaults=function (guess, faults) {
+        ctx.font = '50px Courier';
+        ctx.fontStyle = 'Black';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(guess, canvas.width, 10+faults*35);
+        ctx.fillRect(canvas.width-30, 10+faults*35, 30, 2);
+    };
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    
+    var word = pickWord();
+    var answerArray = setupAnswerArray(word);
+    var remainingLetters = word.length;
+
+    while (remainingLetters > 0) {
+        showPlayerProgress(answerArray);
+        var guess = getGuess() 
+        if (guess === null) {
+            alert('конец игры!');
+            break;
+        } else if (guess.length !== 1) {
+            alert("Пожалуйста, введите одину букву.");
+        } else {
+            var correctGuesses = updateGameState(guess, word, answerArray);
+            if (correctGuesses === 0) {
+                faults++;
+                drawMan(faults);
+                drawFaults(guess, faults);
+            }
+            if (faults > 6) {
+                alert('конец игры');
+                break;
+            } 
+            if (correctGuesses > 0) {
+                remainingLetters -= correctGuesses;
+            }
+            if (correctGuesses === null) {
+                alert('Эта буква уже угадана');
+            }
+        }
+    };
+    showPlayerProgress(answerArray);
+    </script>
+</body>
+
+</HTML>

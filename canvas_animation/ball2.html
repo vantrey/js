@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+        <!-- <script src="https://code.jquery.com/jquery-2.1.0.js"></script> -->
+        <title>Ball animation2</title>
+    </head>
+
+    <body>
+        <!-- <h1 id=heading></h1> -->
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+
+            var Ball = function() {
+                this.x = 200;
+                this.y = 200;
+                this.xSpeed = Math.random() * 10 - 5;
+                this.ySpeed = Math.random() * 10 - 5;
+                var colors = [
+                    "red",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "purple",
+                    "orange"
+                ];
+                this.color = pickRandomColor(colors);
+
+                // this.draw = function() {
+                //     circle(this.x, this.y, 3, true);
+                // };
+                // this.move = function() {
+                //     this.x += this.xSpeed;
+                //     this.y += this.ySpeed;
+                // };
+                // this.checkColision = function() {
+                //     if (this.x < 0 || this.x > canvas.width) {
+                //         this.xSpeed = -this.xSpeed;
+                //     }
+                //     if (this.y < 0 || this.y > canvas.height) {
+                //         this.ySpeed = -this.ySpeed;
+                //     }
+                // };
+            };
+            function pickRandomColor(colors) {
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            function circle(x, y, radius, fillCircle) {
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+                if (fillCircle) {
+                    ctx.fill();
+                } else {
+                    ctx.stroke();
+                }
+            }
+
+            Ball.prototype.draw = function() {
+                circle(this.x, this.y, 5, true);
+                ctx.fillStyle = this.color;
+            };
+
+            Ball.prototype.move = function() {
+                this.x += this.xSpeed;
+                this.y += this.ySpeed;
+            };
+
+            Ball.prototype.checkColision = function() {
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.xSpeed = -this.xSpeed;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.ySpeed = -this.ySpeed;
+                }
+            };
+
+            var ball = new Ball();
+            var balls = [];
+
+            for (var i = 0; i < 10; i++) {
+                balls[i] = new Ball();
+            }
+
+            setInterval(function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // ball.draw();
+                for (var i = 0; i < balls.length; i++) {
+                    balls[i].draw();
+                    balls[i].move();
+                    balls[i].checkColision();
+                }
+                // ball.move();
+                // ball.checkColision();
+                ctx.strokeRect(0, 0, canvas.width, canvas.height);
+            }, 30);
+        </script>
+    </body>
+</html>

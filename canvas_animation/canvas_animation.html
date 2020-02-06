@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>CAnvas Animation</title>
+</head>
+
+<body style="background-color: #514c74;">
+    <canvas id="canvas" height="300" width="300"></canvas>
+    <script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    // анимируем квадрат
+
+    // var position = 0;
+    // setInterval(function() {
+    //     ctx.clearRect(0, 0, canvas.height, canvas.width);
+    //     ctx.fillRect(position, 0, 10, 10);
+    //     position++;
+    //     if (position>canvas.width) {
+    //         position=0;
+    //     }
+    // }, 30);
+
+    //             var size = 0;
+    //             setInterval(function() {
+    //                 ctx.fillStyle = "#426bb8b6";
+    //                 ctx.clearRect(0, 0, canvas.height, canvas.width);
+    //                 ctx.fillRect(0, 0, size, size);
+    //                 size++;
+    //                 if (size > canvas.width) {
+    //                     size = 0;
+    //                 }
+    // }, 30);
+
+
+
+    // рисуем анимированную пчелу
+
+    var circle = function(x, y, radius, fillCircle) {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+        if (fillCircle) {
+            ctx.fill();
+        } else {
+            ctx.stroke();
+        }
+    };
+
+    var drawBee = function(x, y) {
+        ctx.strokeStyle = "black";
+        ctx.fillStyle = "gold";
+        circle(x, y, 8, true);
+        circle(x, y, 8, false);
+        circle(x - 5, y - 11, 5, false);
+        circle(x + 5, y - 11, 5, false);
+        circle(x - 2, y - 1, 2, false);
+        circle(x + 2, y - 1, 2, false);
+    };
+
+    var update = function(coordinate) {
+        var offset = Math.random() * 4 - 2;
+        coordinate += offset;
+        if (coordinate > 200) {
+            coordinate = 200;
+        }
+        if (coordinate < 0) {
+            coordinate = 0;
+        }
+        return coordinate;
+    };
+    x = 100;
+    y = 100;
+
+    setInterval(function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        x = update(x);
+        y = update(y);
+        drawBee(x, y);
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    });
+    </script>
+</body>
+
+</html>

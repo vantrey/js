@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="treasure.css">
+	<title>Find the treasure</title>
+</head>
+<body>
+	<div id=tabelContent>
+		<div class=tableRow>
+			<h1 id=header>Let's find the treasure!</h1>
+			<p id=empty></p>
+		</div>
+		<div class=tableRow>
+			<div id=allContent>
+				<div id=game>
+					<img id="map" src="images/treasuremap.png">
+					<p id="distance"></p>
+					<p id="remainsClicks"></p>
+				</div>
+				<div id="congretulationImg"></div>
+			</div>
+			<nav>
+				<ul>
+					<li> <a href="treasure_easy.html">Easy</a> </li>
+					<li> <a href="treasure_medium.html">Medium</a> </li>
+					<li class="selected"> <a href="treasure_hard.html">Hard</a> </li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<script src="jquery-2.1.0.js"></script>
+	<script>
+		var getRandomNumber=function(size){
+			return Math.floor(Math.random()*size);
+		};
+		var getDistance=function(event, target) {
+			diffX=event.offsetX-target.x;
+			diffY=event.offsetY-target.y;
+			console.log("offset x y "+event.offsetX+ " "+event.offsetY);
+			console.log("target x y "+target.x+" "+target.y);
+			return Math.sqrt((diffX*diffX)+(diffY*diffY));
+		};
+		var getDistanceHint=function(distance) {
+			if (distance<10) {
+				return "Обожжешься!!!";
+			} else if (distance<20) {
+				return "Очень горячо!";
+			} else if (distance<40) {
+				return "Горячо";
+			} else if (distance<60) {
+				return "Горечее";
+			} else if (distance<80) {
+				return "Тепло";
+			} else if (distance<100) {
+				return "Теплее";
+			} else if (distance<120) {
+				return "Чуть-чуть теплее";
+			} else if (distance<140) {
+				return "Прохладно";
+			} else if (distance<160) {
+				return "Холодно";
+			} else if (distance<320) {
+				return "Очень холодно";
+			} else {
+				return "Замерзнешь!";
+			}
+		};
+		var colorСlicksPrint=function(clicksPrint, distanceHint) {
+			
+			$("#distance").text(distanceHint);
+			$("#remainsClicks").empty().append(clicksPrint);
+		};
+		var width=400;
+		var height=400;
+		var clicks=0;
+		var remainsClicks=16;
+		var target={
+			x:getRandomNumber(width),
+			y:getRandomNumber(height)
+		};
+		
+		$("#map").click(function(event){
+			clicks++;
+			remainsClicks--;
+			var colorClicks={
+			manyClicks:"Осталось кликов: "+remainsClicks,
+			fewClicks:"Осталось кликов: <span id=fewClicks> "+remainsClicks+"</span>",
+			fewestClicks:"Осталось кликов: <span id=fewestClicks> "+remainsClicks+"</span>"
+		};
+			var distance=getDistance(event, target);
+			console.log("distance "+distance);
+			var distanceHint=getDistanceHint(distance);
+			if (remainsClicks<0) {
+				$("#game").slideUp(2000);
+				setTimeout(function () {alert("Конец игры!");
+				}, 2000)
+			}  else if (remainsClicks<5) {
+				colorСlicksPrint(colorClicks.fewestClicks, distanceHint);
+			}  else if (remainsClicks<10) {
+				colorСlicksPrint(colorClicks.fewClicks, distanceHint);
+			}  else {
+				colorСlicksPrint(colorClicks.manyClicks, distanceHint);
+			}
+			if (distance<5) {
+				$("#game").fadeOut(2000);
+				setTimeout(function () {$(
+					"#congretulationImg").append(
+					"<img src='images/WS2k.gif'>");
+				}, 2000);
+				setTimeout(function () {
+					alert("Клад найден! Сделано кликов: "+clicks);
+				}, 3000);
+			
+			} 
+		});
+		
+		
+		
+		
+		
+		
+		
+
+	</script>
+</body>
+</html>

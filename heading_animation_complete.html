@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>heading animation</title>
+</head>
+<body>
+	<h1 id=heading>Click to start</h1>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+<script>
+	var leftOffset=0;
+	var topOffset=0;
+	$("#heading").offset({
+		top: 0,
+		left: 0
+	})
+	
+	var right=function(){
+		leftOffset++;
+		$("#heading").offset({
+			left:leftOffset
+		});
+		
+	};
+	var down=function(){
+		topOffset++;
+		$("#heading").offset({
+			top: topOffset
+		});
+		
+	};
+	var left=function(){
+		leftOffset--;
+		$("#heading").offset({
+			left: leftOffset
+		});
+		
+	};
+	var up=function(){
+		topOffset--;
+		$("#heading").offset({
+			top: topOffset
+		});
+		
+	}; 
+	function moving() {
+		if (leftOffset<201 && topOffset<1) {
+			right();
+		} else if (leftOffset>200 && topOffset<201) {
+			down();
+		} else if (leftOffset>0 && topOffset>200) {
+			left();
+		} else {
+			up();
+		}
+	};
+	var speedUp=100;
+	var clickCounter=10;
+	var stopMoving=setInterval(moving, speedUp);
+
+	$("#heading").click(function(){
+		clearInterval(stopMoving);
+		speedUp/=2;
+		clickCounter--;
+		if (clickCounter>0) {
+			$("#heading").text(clickCounter);
+			stopMoving=setInterval(moving, speedUp);
+		} else {
+			$("#heading").text("You are Winner!!!");
+			clearInterval(stopMoving);
+		}
+	});
+
+		
+	
+</script>
+</body>
+</html>

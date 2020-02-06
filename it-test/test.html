@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <title>miniGoogle</title>
+</head>
+
+<body>
+    <div id='conteiner'>
+        <h1 id='heading'>Google</h1>
+        <div id='search-area'>
+            <input type='text' id='search-input'>
+            <button id='search-button'>search</button>
+        </div>
+    </div>
+    <script>
+    var inputEl = document.getElementById('search-input');
+    var buttonEl = document.getElementById('search-button');
+
+    buttonEl.addEventListener('click', function() {
+        setTimeout(tOut, 3000);
+    });
+
+
+    function tOut() {
+        alert(inputEl.value);
+        alert(arrayObjects[0].name)
+        if (inputEl.value === 'google') {
+            alert('Яндекс круче, но это не точно');
+        }
+        superSumm(5, 19);
+    }
+
+    var arrayObjects = [{
+            age: 34,
+            name: 'Ivan'
+        },
+        {
+            age: 34,
+            name: 'Ann'
+        },
+        {
+            age: 2.5,
+            name: 'Ulia'
+        },
+        {
+            age: 0.8,
+            name: 'Varia'
+        }
+    ];
+
+    function superSumm(x, y) {
+        var result = x + y;
+        alert('seperSumm= ' + result);
+    }
+
+    function randomNubmers() {
+        return Math.floor(Math.random() * 10);
+    }
+
+    var randomArray = [randomNubmers(), randomNubmers(), randomNubmers(), randomNubmers()];
+
+    /*var max = randomArray[0];
+    var min = randomArray[0];
+    for (var i = 0; i < randomArray.length; i++) {
+
+        if (max < randomArray[i]) {
+            max = randomArray[i];
+        }
+        if (min > randomArray[i]) {
+            min = randomArray[i];
+        }
+
+    }
+    console.log("max = " + max);
+    console.log("min = " + min);*/
+
+    function finedMax(arrayObject) {
+        var max = arrayObject[0];
+
+        for (var i = 0; i < arrayObject.length; i++) {
+
+            if (max < arrayObject[i]) {
+                max = arrayObject[i];
+
+            }
+
+        }
+        return max;
+    }
+
+    console.log("max el of mass = " + finedMax(randomArray));
+
+    var a = 'google';
+    var b = 'yandex';
+
+    var newA = b;
+    var newB = a;
+    var a = newA;
+    var b = newB;
+    console.log(a);
+    console.log(b);
+    </script>
+</body>
+
+</html>

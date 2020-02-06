@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>setInterval</title>
+    </head>
+    <body>
+        <script>
+            /*var doHomeWork=function() {
+		alert("Do homework!");
+	};
+	var timeOutId=setTimeout(doHomeWork, 3000);
+	clearTimeout(timeOutId);
+	*/
+            var counter = 1;
+            var printMessage = function() {
+                console.log("You look at the console while" + counter + "sec");
+                counter++;
+            };
+            function breakSetInterval() {
+                clearInterval(intervalID);
+            }
+            var intervalID = setInterval(printMessage, 1000);
+            setTimeout(breakSetInterval, 5000);
+        </script>
+    </body>
+</html>

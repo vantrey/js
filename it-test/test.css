@@ -1,0 +1,18 @@
+body #conteiner {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+body #conteiner #search-area #search-input  {
+	width:300px;
+	height: 20px;
+	padding: 5px;
+	border: thin solid red;
+		
+}
+
+body #conteiner #search-area #search-button {
+	width:75px;
+	height: 34px;
+	background-color: #2EBD2E;
+}

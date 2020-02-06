@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Words</title>
+</head>
+<body>
+	<script>
+		
+		var words=["программа","макака","прекрасный", "оладушек", "крокодил", "бегемот"];
+		var word=words[Math.floor(Math.random()* words.length)];
+		var answerArray=[];
+		for (var i = 0; i < word.length; i++) {
+			answerArray[i]="_";
+		}
+		var remainingLetters=word.length;
+		var guesses=20;
+		alert("Кол-во букв "+remainingLetters+" Кол-во попыток "+guesses);
+
+
+		while (remainingLetters>0 && guesses>0) {
+
+			
+			alert("Слово "+answerArray.join(" "));
+			var guess=prompt("Угадай букву или нажми ОТМЕНА для выхода из игры.");
+			
+			if (guess===null) {
+				break;
+			} else {
+				if (guess.length!==1) {
+					alert("Пожалуйста, введите только одну букву.");
+				} else {
+					guess=guess.toLowerCase();
+					guesses--;
+					alert("Осталось попыток "+guesses);
+					for (var j = 0; j < word.length; j++) {
+						if (word[j]===guess && answerArray[j]!==guess) {
+							answerArray[j]=guess;
+							remainingLetters--;
+														
+						}
+					}
+				}
+			}
+
+		}
+		alert("Слово "+answerArray.join(" "));
+		alert("Было загадано слово "+word);
+		
+	</script>
+
+</body>
+</html>		
+		

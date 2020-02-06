@@ -1,0 +1,20 @@
+.tol-calculator {
+    width: 500px;
+    margin: auto;
+    text-align: center;
+    background-color: aquamarine;
+    padding: 20px;
+    border: thin solid black;
+}
+.tol-calculator .operations-block button {
+    width: 40px;
+    height: 40px;
+    margin: 20px;
+}
+.tol-calculator .inputs-block .input-block label {
+    display: block;
+}
+.tol-calculator .inputs-block .input-block {
+    display: inline-block;
+    padding: 10px;
+}

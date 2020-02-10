@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>nativeJs 1</title>
+</head>
+<body>
+<script>
+
+  // typeof возвращает тип переменной
+  // console.log(Array.isArray(arr)); возвращает true or false массив или нет
+  // console.dir выводит структуру переменной
+  console.log(`yo ${5 + 10}         oy`);
+
+  let arr = [15, 20, 50];
+  /*let arr2 = arr.map(function(nnn) {
+    return nnn * 2;
+  });*/
+  let arr2 = arr.map(nnn => nnn * 2)
+  console.log(`arr2 ${arr2}`);
+
+  let arrSplice = ['я', 'изучаю', 'js'];
+  removedElements = arrSplice.splice(-2, 1, 'еще', 'плохо', 'знаю') // splice возвращ удаленные элементы массива
+  // отриц значит отщет с конца
+  console.log(`splice result ${arrSplice}`)
+  console.log(`удаленные элементы массива - ${removedElements}`)
+
+  let arrSlice = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  arrSlice2 = arrSlice.slice(2, -2)
+  console.log(`скопированный массив начиная с 2 и заканч 2 с конца ${arrSlice2}`)
+  //если slise() - то копирует весь массив
+  arrConcat = [1, 2, 3]
+  console.log
+  (`concat склемвает мсходный массив с другими данными ${arrConcat.concat(56, 7, 8, [11, 333])}`);
+
+
+  let users = [
+    {id: 1, name: "Вася"},
+    {id: 2, name: "Петя"},
+    {id: 3, name: "Маша"}
+  ];
+
+  /*let user = users.find(function (item) {
+      return item.idd===1;
+  });*/
+  let user = users.find(itemmmm => itemmmm.name === `Вася`)
+  let userId = users.find(item => item.id === 2)
+  console.log(user);
+  console.log(userId.name); // Вася
+  console.log(users.findIndex(iitem => iitem.id === 3)) //возвращ индекс массива
+  let someUsers = users.filter(item => item.id < 3)
+  console.log(someUsers)
+
+  /*     let ar=[1, -2, 15, 2, 0, 8].sort(function(a, b) {
+         alert( a + " <> " + b );
+     });*/
+  let arrSort = [1, 15, -2, 7]
+  arrSort.sort((a, b) => a - b);
+  console.log(`сортировка ${arrSort}`)
+
+
+  let arrReverse = [1, 2, 3, 4, 5]
+  console.log(arrReverse.reverse())
+  let strSplit = 'вася, петя, маша'
+  let arrSplit = strSplit.split(', ')
+  console.log(arrSplit)
+
+  let arrReduce = [1, 2, 3, 4, 5];
+  let result = arrReduce.reduce((sum, current) => sum + current, 0);
+  console.log(result); // 15
+
+
+</script>
+</body>
+</html>

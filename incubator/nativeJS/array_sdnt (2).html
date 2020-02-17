@@ -83,6 +83,7 @@
   let oldArray = [23, 5, null, true, 'Bob', [], {}];
   let newArray = [];
 
+
   newArray = oldArray.map(item => {
     if (typeof item === 'number') {
       return {age: item}
@@ -192,8 +193,60 @@
   //-Math
   //-sort
 
+  rArr = [3, 1, 77, 56, 61, 4];
+
+  /*  function max (arr) {
+      let max = arr[0];
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i]>max){
+          max=arr[i];
+        }
+      }
+      return max;
+    }*/
+
+  /*  function max(arr) {
+      let max = arr[0];
+      arr.forEach(num => num > max ? max = num : num)
+      return max;
+    }*/
+
+  /* function max (arr){
+     return Math.max(...arr);
+   }*/
+
+
+
+  function max(arr) {
+    return arr.sort((a, b) => a - b).reverse()[0];
+  }
+
+  console.log(max(rArr));
+
+
+
   // Всё сделал? Красавчик! :)))))
 
+
+  // задача 1 из lern.javascript методы массива
+
+  let strL = 'background-color-white';
+
+  function camelize(str) {
+
+    let arr = str.split('');
+
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i] === '-') {
+        arr.splice(i, 2, arr[i + 1].toUpperCase())
+      }
+    }
+    return arr.join('');
+  }
+
+
+  let updStrL = camelize(strL)
+  console.log(updStrL)
 
 </script>
 

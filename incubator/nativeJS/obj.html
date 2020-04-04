@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Object</title>
+</head>
+<body>
+<script>
+  function setName(newName) {
+    if (typeof newName === "string" && newName.trim()) {
+      this._name = newName
+    } else {
+      console.log("Неверное значение")
+    }
+  }
+
+  const student = {
+    _name: "Alex",
+    "age": 22,
+    isStudent: true,
+    friends: ["Bob", "Nick"],
+    greeting: function () {
+      console.log("I'm a function")
+    },
+    setName: setName
+  };
+  const student2 = {
+    _name: "Bob",
+    "age": 22,
+    isStudent: true,
+    friends: ["Alex", "Nick"],
+    greeting: function () {
+      console.log("I'm a function")
+    },
+    setName: setName
+  };
+
+
+  // student.name = "";
+  student.setName("Helen");
+  console.dir(student);
+  student2.setName("Helga");
+  console.dir(student2);
+  student.greeting();
+
+  const newProp = "isHavePet";
+
+  function getPropName() {
+    return "isHavePet";
+  }
+
+  student[getPropName()] = true;
+
+  const first = {a: 1, b: 2};
+  const sec = first;
+  sec.a = 10;
+  console.log(first.a);
+
+  const copyFirst = {...first};
+  const newObj = {...student, ...first}
+
+  const newStudent = {...student, friends: [...student.friends]};
+  newStudent.friends.push("Vlad");
+  console.dir(student);
+
+  const baseStudent = {
+    setName: function setName(name) {
+      this.name = name;
+    },
+    setAge: function setAge(age) {
+      this.age = age;
+    }
+  };
+
+  function createStudent(baseStudent, name, age) {
+    const ins = Object.create(baseStudent);
+    ins.setName(name);
+    ins.setAge(age);
+    return ins;
+  }
+
+  function cloneCreator(n, a) {
+    return {
+      name: n,
+      age: a,
+      greeting: function () {
+        return `Hey! My name is ${this.name}.`;
+      },
+      aboutMe: function () {
+        return `I'm ${this.age} years old.`
+      }
+    }
+  }
+
+  let newHuman = cloneCreator("Igor", 35);
+  console.log(newHuman.greeting());
+
+  function Human(n, a) {
+          this.name = n,
+            this.age = a
+    // this.greeting = function(){
+    //         return `Hey! My name is ${this.name}.`;
+    //     },
+    // this.aboutMe = function(){
+    //         return `I'm ${this.age} years old.`
+    //     }
+  };
+
+  Human.prototype.greeting = function () {
+    return `Hey! My name is ${this.name}.`;
+  };
+  Human.prototype.aboutMe = function () {
+    return `I'm ${this.age} years old.`
+  };
+  console.dir(Human);
+
+  const john = new Human("John", 33);
+  const tfhj = new Human("tfhj", 33);
+  const joxvhn = new Human("joxvhn", 33);
+  const jzxcvZXohn = new Human("jzxcvZXohn", 33);
+
+  console.dir(john.greeting());
+
+  // let myArr = [];
+  let myArr = new Array();
+  myArr.push("yo!");
+  Array.prototype.hey = function () {
+    console.log("hey!")
+  }
+  let myArr2 = [];
+  myArr2.hey();
+  myArr2.yo = "yo";
+
+
+  // let obj = {};
+  let obj = new Object();
+  console.dir(myArr2.hasOwnProperty('hey'));
+  let ownProps = Object.keys(myArr2);
+  console.log(ownProps);
+
+  class HumanClass {
+    constructor(name, age) {
+      this.name = name,
+        this.age = age
+      // this.getYo = function() {
+      //     console.log("yo!")
+      // }
+    };
+
+    greeting() {
+      return `Hey! My name is ${this.name}.`;
+    };
+
+    aboutMe() {
+      return `I'm ${this.age} years old.`;
+    };
+  }
+
+  let humanClass = new HumanClass("Vadim", 25);
+  // humanClass.getYo();
+
+  // class Component extends React.Component {......}
+  // <Component name="John" age={23} /> // new Component("John", 23) -> constructor -> {} -> {}.render()-> JSX -> JS -> HTML
+
+
+  class Person extends HumanClass {
+    constructor(name, age, gender) {
+      super(name, age);
+      // this.gender = gender;
+    }
+
+    gender = gender;
+    sayBue = () => {
+      return `Bue-bue!!!!`
+    }
+  }
+
+  let helen = new Person("Helen", 19, "female");
+  console.dir(helen.hasOwnProperty("name"));
+
+
+</script>
+</body>
+</html>

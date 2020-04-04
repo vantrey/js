@@ -216,21 +216,16 @@
    }*/
 
 
-
   function max(arr) {
     return arr.sort((a, b) => a - b).reverse()[0];
   }
 
   console.log(max(rArr));
-  s=''
+  s = ''
   let arr221 = [...s]
   let correct = arr221.filter(item => item < 'n')
   console.log(s)
-  console.log( `${arr221.length-correct.length}/${correct.length}`)
-
-
-
-
+  console.log(`${arr221.length - correct.length}/${correct.length}`)
 
 
   // Всё сделал? Красавчик! :)))))
@@ -252,12 +247,100 @@
     return arr.join('');
   }
 
+
   let updStrL = camelize(strL)
   console.log(updStrL)
 
+  let strrrrr = '12345'
+
+  function flr(string) {
+    return string.slice(1, string.length - 1)
+  }
+
+  console.log(flr(strrrrr))
+
+  ww = [3, 5, 77, 23, 1]
+
+  function sumTwoSmallestNumbers(numbers) {
+    const arr = numbers.sort((a, b) => (a - b))
+    return arr[0] + arr[1]
+  }
+
+  console.log(sumTwoSmallestNumbers(ww))
+
+  function encrypt(text, n) {
+    if (!text || n <= 0) {
+      return text
+    } else {
+      let acc = text
+      for (let i = 0; i < n; i++) {
+        const startArr = [...acc].filter((char, i) => i % 2)
+        const endArr = [...acc].filter((char, i) => !(i % 2))
+        acc = startArr.concat(endArr).join('')
+      }
+      return acc
+    }
+  }
+
+  console.log(encrypt('1234567', 2))
+
+  function decrypt(encryptedText, n) {
+    if (!encryptedText || n <= 0) {
+      return encryptedText
+    } else {
+      let acc = encryptedText
+
+      for (let i = 0; i < n; i++) {
+        let res = []
+        let arr = [...acc]
+        let endArr = arr.splice(0, Math.floor(arr.length / 2))
+        for (let j = 0; j < arr.length; j++) {
+          res.push(arr[j])
+          res.push(endArr[j])
+        }
+        acc = res.join('')
+      }
+      return acc
+    }
+  }
+
+  console.log(decrypt('4152637', 2))
+
+  function solution(str, ending) {
+    str.endsWith(ending)
+  }
+
+
+  /*  function rere(arr) {
+      let nn = 0
+      arr1 = [...arr]
+      arr.forEach((item, index) => {
+        for (let i = 0; i < arr.length; i++) {
+          if (item === arr[i] && index !== i) {
+            arr1.splice(1, i)
+          }
+        }
+      })
+      return arr1
+    }
+    console.log(rere([1,1,1,1,1,2,2]))
+    */
+  function arithmetic(a, b, operator) {
+    let check = () => {
+      return (
+        operator === 'add' && a + b ||
+        operator === 'subtract' && a - b ||
+        operator === 'multiply' && a * b ||
+        operator === 'divide' && a / b
+      )
+    }
+    if (!check()) return 0
+    else return check()
+  }
 
 
 
+  console.log(arithmetic(3, 3, 'subtract'))
 </script>
 
 

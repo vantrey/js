@@ -338,9 +338,31 @@
     else return check()
   }
 
-
-
   console.log(arithmetic(3, 3, 'subtract'))
+
+  var gimme = function (inputArray) {
+    let order = [...inputArray].sort((a, b) => a - b)
+    return inputArray.indexOf(order[1])
+  };
+
+  function collision(x1, y1, radius1, x2, y2, radius2) {
+    let dist = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2))
+    return radius1 + radius2 >= dist;
+  }
+
+  function findUniq(arr) {
+    let sortArr = arr.sort((a, b) => a - b)
+    if (sortArr[0] !== sortArr[1]) return sortArr[0]
+    else return sortArr[sortArr.length - 1]
+  }
+
+  function removeUrlAnchor(url){
+    let arr = [...url]
+    if (arr.indexOf('#') === -1) return url
+    else return arr.slice(0, arr.indexOf('#')).join('')
+  }
+
+  console.log([...'abcd'])
 </script>
 
 

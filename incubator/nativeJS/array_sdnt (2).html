@@ -356,21 +356,119 @@
     else return sortArr[sortArr.length - 1]
   }
 
-  function removeUrlAnchor(url){
+  function removeUrlAnchor(url) {
     let arr = [...url]
     if (arr.indexOf('#') === -1) return url
     else return arr.slice(0, arr.indexOf('#')).join('')
   }
 
+  function filter_list(l) {
+    return l.filter(l => typeof l === 'number')
+  }
+
+  function isTriangle(a, b, c) {
+    let arr = [a, b, c].sort((a, b) => a - b)
+    return arr[0] + arr[1] > arr[2];
+  }
+
+
   console.log([...'abcd'])
+
+
+  const binaryArrayToNumber = arr => {
+    return arr.reverse().map((n, i) => {
+      if (n === 1) return Math.pow(2, i)
+      else return 0
+    }).reduce((sum, current) => sum + current, 0)
+  }
+
+  /*  let a = 0
+    let stop = setInterval(() => {
+      console.log(a++)
+      if (a === 5) {
+        clearInterval(stop)
+        console.log ('[[[')
+      }
+    }, 1000)
+    console.log ('[[[')*/
+
+  const binaryArrayToNumber2 = arr => parseInt(arr.join(''), 2);  // parseInt переводит строку в 10-ую систему счисления
+  console.log(binaryArrayToNumber([1, 0, 0, 0]))
+
+  data = [[45, 12], [55, 21], [19, -2], [104, 20]]
+
+  function openOrSenior(data) {
+    return data.map(item => item[0] >= 55 && item[1] > 7 ? 'Senior' : 'Open')
+  }
+
+  console.log(openOrSenior(data))
+
+  /*  let f = (num) => {
+      let tm = num.toString().split('').map(r => Number(r))
+      let counter = 0
+      while (tm.length > 1) {
+        counter++
+        tm = tm.reduce((acc, cur) => {
+          return acc + cur
+        })
+      }
+      return counter
+    }*/
+
+  function persistence(num) {
+    let convert = (n) => {
+      return n.toString().split('').map(n => Number(n))
+    }
+    let arr = convert(num)
+    let counter = 0
+    while (arr.length > 1) {
+      counter++
+      arr = convert(arr.reduce((acc, cur) => acc * cur))
+    }
+    return counter
+  }
+
+  console.log(persistence(39))
+
+
+  function isSortedAndHow(array) {
+    if (Math.min(...array) === array[0] && Math.max(...array) === array[array.length - 1]) {
+      return 'yes, ascending'
+    } else if (Math.min(...array) === array[array.length - 1] && Math.max(...array) === array[0]) {
+      return 'yes, descending'
+    } else return 'no'
+  }
+
+  let tmp = [1, 2, 6]
+  console.log(Math.min(...tmp))
+
+  console.log(isSortedAndHow([1, 2, 3]))
+
+  getRandomColor = () => {
+    let randomRed = Math.floor(Math.random()*256)
+    let randomGreen = Math.floor(Math.random()*256)
+    let randomBlue = Math.floor(Math.random()*256)
+    return `rgb(${randomRed},${randomGreen},${randomBlue})`
+  }
+
+  getText = (text) => {
+
+      return text.split(' ').map((w, i, words) => {
+        if (i === words.length - 1) {
+          return [...w].map(ch => '<span style={{color: this._getRandomColor()}}>{ch}&#128152;</span>')
+        } else return [...w].map(ch => '<span style={{color: this._getRandomColor()}}>{ch}</span>')
+      })
+
+    }
+    console.log(getText('zizi top rte'))
+
+  console.log(getRandomColor())
+
+
 </script>
 
 
-
-
-
-
-
+&#128152;
 
 
 

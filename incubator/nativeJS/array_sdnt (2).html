@@ -445,26 +445,124 @@
   console.log(isSortedAndHow([1, 2, 3]))
 
   getRandomColor = () => {
-    let randomRed = Math.floor(Math.random()*256)
-    let randomGreen = Math.floor(Math.random()*256)
-    let randomBlue = Math.floor(Math.random()*256)
+    let randomRed = Math.floor(Math.random() * 256)
+    let randomGreen = Math.floor(Math.random() * 256)
+    let randomBlue = Math.floor(Math.random() * 256)
     return `rgb(${randomRed},${randomGreen},${randomBlue})`
   }
 
   getText = (text) => {
 
-      return text.split(' ').map((w, i, words) => {
-        if (i === words.length - 1) {
-          return [...w].map(ch => '<span style={{color: this._getRandomColor()}}>{ch}&#128152;</span>')
-        } else return [...w].map(ch => '<span style={{color: this._getRandomColor()}}>{ch}</span>')
-      })
+    return text.split(' ').map((w, i, words) => {
+      if (i === words.length - 1) {
+        return [...w].map(ch => '<span style={{color: this._getRandomColor()}}>{ch}&#128152;</span>')
+      } else return [...w].map(ch => '<span style={{color: this._getRandomColor()}}>{ch}</span>')
+    })
 
-    }
-    console.log(getText('zizi top rte'))
+  }
+  console.log(getText('zizi top rte'))
 
   console.log(getRandomColor())
 
+  let parse = parseInt('10000000001000000000101000000001', 2)
+  console.log(parse)
 
+  let converterToBin = function (num) {
+    let bin = []
+    let acc = num
+    for (let i = 0; i < acc;) {
+      if (acc % 2) {
+        bin.push(1)
+        acc = Math.floor(acc / 2)
+      } else {
+        bin.push(0)
+        acc = acc / 2
+      }
+    }
+    for (let i = bin.length; i < 8; i++) { // 8 bit
+      bin.push(0)
+    }
+    return bin.reverse().join('')
+  }
+
+  function ipToInt32(ip) {
+    let converterToBin = function (num) {
+      let bin = []
+      let acc = num
+      for (let i = 0; i < acc;) {
+        if (acc % 2) {
+          bin.push(1)
+          acc = Math.floor(acc / 2)
+        } else {
+          bin.push(0)
+          acc = acc / 2
+        }
+      }
+      for (let i = bin.length; i < 8; i++) { // 8 bit
+        bin.push(0)
+      }
+      return bin.reverse().join('')
+    }
+    let ipArr = ip.split('.')
+    let binArr = ipArr.map(n =>
+      converterToBin(Number(n))).join('')
+    return parseInt(binArr, 2)
+  }
+
+  function ipToInt32r(ip) {
+    return ip.split('.').reduce((s, v) => {
+      console.log(256 * s + Number(v))
+      return 256 * s + Number(v)
+    }, 0);
+  }
+
+  console.log(1 % 2)
+  console.log(Math.floor(1 / 2))
+  let bin = '3'
+  console.log(bin += '1')
+  console.log(converterToBin(1))
+  console.log(ipToInt32r('128.32.10.1'))
+
+  function kebabize(str) {
+    let arr = [...str]
+    let output = arr.map(ch => {
+      if (ch.codePointAt(0) > 64 && ch.codePointAt(0) < 91) {
+        return `-${ch.toLowerCase()}`
+      } else if (ch.codePointAt(0) < 64) {
+        return ``
+      } else return ch
+    }).join('')
+    return [...output].map((ch, i) => {
+      if (i === 0 && ch === '-') {
+        return ''
+      } else return ch
+    }).join('')
+  }
+
+  console.log(kebabize('23453YWERErr5tyYfgjhzZ'))
+  console.log('7'.codePointAt(0))
+  console.log(String.fromCodePoint(65))
+  console.log(3..toString(2)) // перевод в 10-у число в указанную систему счисления
+  console.log(parseInt('1101', 2))
+  console.log(Math.round(87.49))
+
+  function gracefulTipping(bill) {
+    let billWithTip = bill / 100 * 15 + bill
+    let limit = billWithTip
+    let counter = 1
+    for (i = 99; i < limit;) {
+      limit /= 10
+      counter *= 10
+    }
+    return billWithTip < 10 ? Math.ceil(billWithTip) :  Math.ceil(billWithTip / (5 * counter)) * (5 * counter)
+    /*return billWithTip < 10 ? Math.ceil(billWithTip) :
+      billWithTip >= 10 && billWithTip < 99.99 ? Math.ceil(billWithTip / 5) * 5 :
+        billWithTip >= 100 && billWithTip < 999.99 ? Math.ceil(billWithTip / 50) * 50 :
+          Math.ceil(billWithTip / 500) * 500*/
+  }
+
+
+  console.log(gracefulTipping(1.09))
 </script>
 
 

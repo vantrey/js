@@ -554,15 +554,73 @@
       limit /= 10
       counter *= 10
     }
-    return billWithTip < 10 ? Math.ceil(billWithTip) :  Math.ceil(billWithTip / (5 * counter)) * (5 * counter)
+    return billWithTip < 10 ? Math.ceil(billWithTip) : Math.ceil(billWithTip / (5 * counter)) * (5 * counter)
     /*return billWithTip < 10 ? Math.ceil(billWithTip) :
       billWithTip >= 10 && billWithTip < 99.99 ? Math.ceil(billWithTip / 5) * 5 :
         billWithTip >= 100 && billWithTip < 999.99 ? Math.ceil(billWithTip / 50) * 50 :
           Math.ceil(billWithTip / 500) * 500*/
   }
 
-
   console.log(gracefulTipping(1.09))
+
+  function solve(n) {
+    let counter = 0
+    let curr = n
+    if (n < 1 || n > 1500 || n % 10) {
+      return -1
+    }
+    let arr = [500, 200, 100, 50, 20, 10]
+    arr.forEach(r => {
+      if (curr / r >= 1) {
+        let de = Math.floor(curr / r)
+        curr = curr - r * de
+        counter += de
+      }
+    })
+    return counter
+  }
+
+  console.log(solve(5000))
+
+  function solver(n) {
+    if (n % 10) return -1
+    return [500, 200, 100, 50, 20, 10].reduce((s, v) => {
+      let ans = n / v | 0
+      n %= v
+      return s + ans
+    }, 0)
+  }
+
+  function solve2(a, b) {
+    let firstStr = ''
+    let secStr = ''
+    let firstArr = [...a]
+    let secArr = [...b]
+    firstArr.forEach((fCh, i) => {
+      if (!secArr.some(sCh => sCh === fCh)) firstStr  += fCh
+    })
+    secArr.forEach((sCh, i) => {
+      if (!firstArr.some(fCh => fCh === sCh)) firstStr  += sCh
+    })
+    return firstStr + secStr
+  }
+  /*function solve2(a,b){
+    return (a+b).split("").filter(c => !a.includes(c) || !b.includes(c)).join("");
+  };*/
+
+  console.log(solve2("xyab","xzcaw"))
+
+  const findAll = (array, n) => {
+    let res = []
+    array.forEach((el, i) => {
+      if (el === n) {
+        res.push(i)
+      }
+    })
+    return res
+  }
+  console.log(findAll([6, 9, 3, 4, 3, 82, 11], 3))
+
 </script>
 
 

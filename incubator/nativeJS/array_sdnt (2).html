@@ -597,18 +597,19 @@
     let firstArr = [...a]
     let secArr = [...b]
     firstArr.forEach((fCh, i) => {
-      if (!secArr.some(sCh => sCh === fCh)) firstStr  += fCh
+      if (!secArr.some(sCh => sCh === fCh)) firstStr += fCh
     })
     secArr.forEach((sCh, i) => {
-      if (!firstArr.some(fCh => fCh === sCh)) firstStr  += sCh
+      if (!firstArr.some(fCh => fCh === sCh)) firstStr += sCh
     })
     return firstStr + secStr
   }
+
   /*function solve2(a,b){
     return (a+b).split("").filter(c => !a.includes(c) || !b.includes(c)).join("");
   };*/
 
-  console.log(solve2("xyab","xzcaw"))
+  console.log(solve2("xyab", "xzcaw"))
 
   const findAll = (array, n) => {
     let res = []
@@ -621,6 +622,30 @@
   }
   console.log(findAll([6, 9, 3, 4, 3, 82, 11], 3))
 
+  let characters = {
+    "characters": [
+      {"name": "Bill Cipher", "age": "12", "speciality": "warp reality"},
+      {"name":"Dipper Pines", "age":"12", "speciality":"adventurer"}
+    ]
+  };
+
+  function getCharacters(obj, key, val) {
+    let foundCharacters = [];
+    if (key !== 'name' && key !== 'age' && key !== 'speciality') {
+      return []
+    } else {
+      if (key === 'name') {
+        val = val.toLowerCase().split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')
+      }
+      if (key === 'speciality') {
+        val = val.toLowerCase()
+      }
+      foundCharacters = obj.characters.filter(item => item[key] === val)
+    }
+    return foundCharacters;
+  }
+
+  console.log(getCharacters(characters, 'age', '12'))
 </script>
 
 
